@@ -22,7 +22,7 @@ class AppFixtures extends Fixture
         $user->setUsername('rdsj');
         $user->setBirthday(new \DateTime('1994-05-21'));
         $user->setGender('Monsieur');
-
+        $user->setRoles(['ROLE_ADMIN']);
         $user->setPassword($this->passwordEncoder->encodePassword(
             $user,
             'test123'
