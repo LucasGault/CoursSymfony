@@ -50,9 +50,8 @@ class RegistrationFormType extends AbstractType
                 ],])
             ->add('roles', CheckboxType::class, [
                 'mapped' => false,
-                'label' => 'isAdmin'
-
-                
+                'label' => 'isAdmin',
+                'required' => false
             ])
 
 
