@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PersonPlace index{% endblock %}
+
+{% block body %}
+    <a href="{{ path('index') }}">Index</a>
+
+    <h1>Lieux visités par des personnes</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>VisitedAt</th>
+                <th>Lieu</th>
+                <th>Personne</th>
+                <th>actions</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+        {% for person_place in person_places %}
+            <tr>
+                <td>{{ person_place.id }}</td>
+                <td>{{ person_place.visitedAt ? person_place.visitedAt|date('d F Y  H:i:s') : '' }}</td>
+                <td>{{ person_place.place.name }}</td>
+                <td>{{ person_place.person.firstname }} {{ person_place.user.lastname }}</td>
+                <td>
+                    <a href="{{ path('person_place_show', {'id': person_place.id}) }}">show</a>
+                    <a href="{{ path('person_place_edit', {'id': person_place.id}) }}">edit</a>
+                </td>
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('person_place_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Place index{% endblock %}
+
+{% block body %}
+    <a href="{{ path('index') }}">Index</a>
+
+    <h1>Lieux index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Street</th>
+                <th>StreetNumber</th>
+                <th>PostalCode</th>
+                <th>MaxNumberOfPersons</th>
+                <th>City</th>
+                <th>Country</th>
+                <th>Cluster</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for place in places %}
+            {% set isCluster = false %}
+            {% for people in place.peopleWhoVisited %}
+                {% if people.person.personCovid %}
+                    {% set isCluster = true %}
+                {% endif %}
+            {% endfor %}
+            <tr>
+                <td>{{ place.id }}</td>
+                <td>{{ place.name }}</td>
+                <td>{{ place.street }}</td>
+                <td>{{ place.streetNumber }}</td>
+                <td>{{ place.postalCode }}</td>
+                <td>{{ place.maxNumberOfPersons }}</td>
+                <td>{{ place.city }}</td>
+                <td>{{ place.country }}</td>
+                <td>{% if isCluster %}OUI{% else %}NON{% endif %}</td>
+                <td>
+                    <a href="{{ path('place_show', {'id': place.id}) }}">show</a>
+                    <a href="{{ path('place_edit', {'id': place.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('place_new') }}">Create new</a>
+{% endblock %}

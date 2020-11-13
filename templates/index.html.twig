@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Index{% endblock %}
+
+{% block body %}
+
+
+<div class="mainIndex bg-black">
+    <nav>
+        <ul >
+            <li><a href="{{ path('person_index') }}">Personne</a></li>
+            <li><a href="{{ path('place_index') }}">Lieux</a></li>
+            <li><a href="{{ path('person_place_index') }}">Lieux visités</a></li>
+            <li><a href="{{ path('person_covid_index') }}">Personne infectée</a></li>
+        </ul>
+    </nav>
+    
+</div>
+
+{% endblock %}

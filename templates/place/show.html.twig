@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Place{% endblock %}
+
+{% block body %}
+    <h1>Description du Lieu</h1>
+    <p> {{ place.name }} </p>
+    <p>
+        {% if place.streetNumber != 0 %}
+        {{ place.streetNumber }}
+        {% endif %}
+        {{ place.street }}, {{ place.postalCode }}, {{ place.city }}, {{ place.country }}
+    </p>
+    <p>
+        Peut accueillir : {{ place.maxNumberOfPersons }} 
+        {% if  place.maxNumberOfPersons <= 1 %}
+        Personne
+        {% else %}
+        Personnes
+        {% endif %}
+    </p>
+
+    {% if place.peopleWhoVisited %}
+        <h1>Lieu visité par : </h1>
+        <ul> 
+            {% for people in place.peopleWhoVisited %}
+                <li {% if people.person.personCovid %}style="color:red"{% endif %}>
+                    {{ people.person.firstname }} {{ people.person.lastname }}
+                    <a href="{{ path('person_show', {'id': people.person.id}) }}">show</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <a href="{{ path('place_index') }}">back to list</a>
+
+    <a href="{{ path('place_edit', {'id': place.id}) }}">edit</a>
+
+    {{ include('place/_delete_form.html.twig') }}
+{% endblock %}

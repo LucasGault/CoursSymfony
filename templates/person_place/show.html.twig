@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PersonPlace{% endblock %}
+
+{% block body %}
+    <h1>Lieux visités</h1>
+
+    <p>
+        <a href="{{ path('person_show', {'id': person_place.person.id}) }}">{{ person_place.person.firstname }} {{ person_place.person.lastname }}</a>
+        a été à 
+        <a href="{{ path('place_show', {'id': person_place.place.id}) }}">{{ person_place.place.name }}</a>
+        le {{ person_place.visitedAt ? person_place.visitedAt|date('d F Y ') : '' }} 
+        à {{ person_place.visitedAt ? person_place.visitedAt|date('H:i:s') : '' }}
+    </p>
+
+    <a href="{{ path('person_place_index') }}">back to list</a>
+
+    <a href="{{ path('person_place_edit', {'id': person_place.id}) }}">edit</a>
+
+    {{ include('person_place/_delete_form.html.twig') }}
+{% endblock %}
